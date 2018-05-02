@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.alter.wxrobot</groupId>
+    <artifactId>weixin-robot</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>weixin-robot</name>
+    
+    <properties>
+    	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<project.build.locales>zh_CN</project.build.locales>
+        <fastjson-version>1.2.34</fastjson-version>
+        <httpclient-version>4.5</httpclient-version>
+        <weixin-java-mp.version>3.0.0</weixin-java-mp.version>
+        <tomcat.version>8.0.29</tomcat.version>
+    </properties>
+    
+    <!-- Spring Boot 启动父依赖 -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.1.RELEASE</version>
+    </parent>
+
+    <dependencies>
+		<!--spring boot 配置处理器 -->    
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        
+        <dependency>  
+            <groupId>org.springframework.boot</groupId>  
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>  
+        </dependency>  
+
+		<dependency>
+		    <groupId>com.alibaba</groupId>
+		    <artifactId>fastjson</artifactId>
+		    <version>${fastjson-version}</version>
+		</dependency>
+		
+	    <dependency>
+		    <groupId>org.apache.httpcomponents</groupId>
+		    <artifactId>httpclient</artifactId>
+		    <version>${httpclient-version}</version>
+		</dependency>
+		
+		<dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-mp</artifactId>
+            <version>${weixin-java-mp.version}</version>
+        </dependency>
+        
+        <dependency> 
+		   <groupId>org.apache.tomcat</groupId> 
+		   <artifactId>tomcat-juli</artifactId> 
+		   <version>${tomcat.version}</version> 
+		</dependency>
+        
+    </dependencies>
+    
+    <build>
+        <plugins>
+         	 <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>springloaded</artifactId>
+                        <version>1.2.5.RELEASE</version>
+                    </dependency>
+                </dependencies>
+                <executions> 
+                       <execution> 
+                           <goals> 
+                               <goal>repackage</goal> 
+                           </goals> 
+                           <configuration> 
+                               <classifier>exec</classifier> 
+                           </configuration> 
+                       </execution> 
+                     </executions>
+                     <configuration>
+                     <source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+                     	<fork>true</fork>
+                     </configuration>
+            </plugin>
+                
+            <!-- 设置jdk版本 maven-archetype-quickstart -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.7</source>
+					<target>1.7</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				 <configuration>
+					<excludes>
+						<exclude>*.properties</exclude>
+						<exclude>*.js</exclude>
+						<exclude>*.xml</exclude>
+					</excludes>
+				</configuration>
+			</plugin>
+			<!-- 设置启动项 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>lib/</classpathPrefix>
+							<mainClass>com.alter.Application</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<!-- 将全包植入到一个jar里面 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-assembly-plugin</artifactId>
+				<configuration>
+					<descriptors>
+						<descriptor>src/main/libs.xml</descriptor>
+						<descriptor>src/main/bin.xml</descriptor>
+					</descriptors>
+				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+	
+        </plugins>
+    </build>
+</project>

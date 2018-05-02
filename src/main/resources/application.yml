@@ -1,0 +1,15 @@
+server:
+  port: 8007
+
+wechat:
+  mp:
+    appId: 
+    secret: 
+    token: 
+    aesKey: 
+    
+    
+logging:
+  config: classpath:logback-spring.xml
+
+

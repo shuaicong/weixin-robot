@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->  
+    <property name="LOG_HOME" value="./log" />  
+    
+	<appender name="consoleAppender" class="ch.qos.logback.core.ConsoleAppender">
+	  <encoder>
+	    <charset>utf-8</charset>             
+   		<pattern>%d{yyyy-MM-dd HH:mm:ss} [%p][%c][%M][%L]-> %m%n</pattern>   
+	  </encoder>
+	</appender>
+	
+	<appender name="dailyRollingFileAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+	  <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+	    <fileNamePattern>${LOG_HOME}/log_%d{yyyyMMddHH}.log</fileNamePattern>
+	    <maxHistory>30</maxHistory>         
+	  </rollingPolicy>
+	 <!--  <encoder>
+	    <Pattern>%msg %n</Pattern>
+	  </encoder> -->  
+	  <encoder>         
+    	<charset>utf-8</charset>             
+   		<pattern>%d{yyyy-MM-dd HH:mm:ss} [%p][%c][%M][%L]-> %m%n</pattern>    
+  	  </encoder> 
+	</appender>
+	
+	<appender name="gemebindAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+	    <filter class="ch.qos.logback.classic.filter.LevelFilter">   
+	      <level>INFO</level>   
+	      <onMatch>ACCEPT</onMatch>   
+	      <onMismatch>DENY</onMismatch>   
+	    </filter>
+	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+	        <fileNamePattern>/data/htdocs/wx/proxy-platform-unite/config/log/gemebind/gemebind.%d{yyyy-MM-dd}.log</fileNamePattern>  
+	        <MaxHistory>30</MaxHistory>
+	    </rollingPolicy>  
+	    <encoder>  
+	        <pattern>%d{HH:mm:ss.SSS} %msg%n</pattern>  
+	    </encoder>  
+	</appender>  
+	<logger name="gemebind" additivity="false">
+      <appender-ref ref="gemebindAppender"/>  
+    </logger> 
+	
+	<appender name="wxfollowAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+	    <filter class="ch.qos.logback.classic.filter.LevelFilter">   
+	      <level>INFO</level>   
+	      <onMatch>ACCEPT</onMatch>   
+	      <onMismatch>DENY</onMismatch>   
+	    </filter>
+	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+	        <fileNamePattern>/data/htdocs/wx/proxy-platform-unite/config/log/wxuserbind/wxuserbind.%d{yyyy-MM-dd}.log</fileNamePattern>  
+	        <MaxHistory>30</MaxHistory>
+	    </rollingPolicy>  
+	    <encoder>  
+	        <pattern>%d{HH:mm:ss.SSS} %msg%n</pattern>  
+	    </encoder>  
+	</appender>  
+	<logger name="wxfollow" additivity="false">
+      <appender-ref ref="wxfollowAppender"/>  
+    </logger>
+    
+    <appender name="followErrorAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+	    <filter class="ch.qos.logback.classic.filter.LevelFilter">   
+	      <level>ERROR</level>   
+	      <onMatch>ACCEPT</onMatch>   
+	      <onMismatch>DENY</onMismatch>   
+	    </filter>
+	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+	        <fileNamePattern>/data/htdocs/wx/proxy-platform-unite/config/log/followError/followError.%d{yyyy-MM-dd}.log</fileNamePattern>  
+	        <MaxHistory>30</MaxHistory>
+	    </rollingPolicy>  
+	    <encoder>  
+	        <pattern>%d{HH:mm:ss.SSS} %msg%n</pattern>  
+	    </encoder>  
+	</appender>  
+	<logger name="followError" additivity="false">
+      <appender-ref ref="followErrorAppender"/>  
+    </logger>
+	
+	<appender name="bindStateAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+	    <filter class="ch.qos.logback.classic.filter.LevelFilter">   
+	      <level>INFO</level>   
+	      <onMatch>ACCEPT</onMatch>   
+	      <onMismatch>DENY</onMismatch>   
+	    </filter>
+	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+	        <fileNamePattern>/data/htdocs/wx/proxy-platform-unite/config/log/bindState/bindState.%d{yyyy-MM-dd}.log</fileNamePattern>  
+	        <MaxHistory>30</MaxHistory>
+	    </rollingPolicy>  
+	    <encoder>  
+	        <pattern>%d{HH:mm:ss.SSS} %msg%n</pattern>  
+	    </encoder>  
+	</appender>  
+	<logger name="bindState" additivity="false">
+      <appender-ref ref="bindStateAppender"/>  
+    </logger>
+    
+    <appender name="fenxiangAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+	    <filter class="ch.qos.logback.classic.filter.LevelFilter">   
+	      <level>INFO</level>   
+	      <onMatch>ACCEPT</onMatch>   
+	      <onMismatch>DENY</onMismatch>   
+	    </filter>
+	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+	        <fileNamePattern>/data/htdocs/wx/proxy-platform-unite/config/log/fenxiang/fenxiang.%d{yyyy-MM-dd}.log</fileNamePattern>  
+	        <MaxHistory>30</MaxHistory>
+	    </rollingPolicy>  
+	    <encoder>  
+	        <pattern>%d{HH:mm:ss.SSS} %msg%n</pattern>  
+	    </encoder>  
+	</appender>  
+	<logger name="fenxiang" additivity="false">
+      <appender-ref ref="fenxiangAppender"/>  
+    </logger>
+    
+    <appender name="shareErrorAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+	    <filter class="ch.qos.logback.classic.filter.LevelFilter">   
+	      <level>ERROR</level>   
+	      <onMatch>ACCEPT</onMatch>   
+	      <onMismatch>DENY</onMismatch>   
+	    </filter>
+	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+	        <fileNamePattern>/data/htdocs/wx/proxy-platform-unite/config/log/shareError/shareError.%d{yyyy-MM-dd}.log</fileNamePattern>  
+	        <MaxHistory>30</MaxHistory>
+	    </rollingPolicy>  
+	    <encoder>  
+	        <pattern>%d{HH:mm:ss.SSS} %msg%n</pattern>  
+	    </encoder>  
+	</appender>  
+	<logger name="shareError" additivity="false">
+      <appender-ref ref="shareErrorAppender"/>  
+    </logger>
+    
+    <appender name="sendCardAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+	    <filter class="ch.qos.logback.classic.filter.LevelFilter">   
+	      <level>INFO</level>   
+	      <onMatch>ACCEPT</onMatch>   
+	      <onMismatch>DENY</onMismatch>   
+	    </filter>
+	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+	        <fileNamePattern>/data/htdocs/wx/proxy-platform-tongshan-uat/config/log/sendCard/sendCard.%d{yyyy-MM-dd}.log</fileNamePattern>  
+	        <MaxHistory>30</MaxHistory>
+	    </rollingPolicy>  
+	    <encoder>  
+	        <pattern>%d{HH:mm:ss.SSS} %msg%n</pattern>  
+	    </encoder>  
+	</appender>  
+	<logger name="sendCard" additivity="false">
+      <appender-ref ref="sendCardAppender"/>  
+    </logger>
+    
+    <appender name="webLogAspectAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">  
+	    <filter class="ch.qos.logback.classic.filter.LevelFilter">   
+	      <level>INFO</level>   
+	      <onMatch>ACCEPT</onMatch>   
+	      <onMismatch>DENY</onMismatch>   
+	    </filter>
+	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+	        <fileNamePattern>/data/htdocs/wx/proxy-platform-tongshan-uat/config/log/webLogAspect/%d{yyyy-MM-dd}.log</fileNamePattern>  
+	        <MaxHistory>30</MaxHistory>
+	    </rollingPolicy>  
+	    <encoder>  
+	        <pattern>%d{HH:mm:ss.SSS} %msg%n</pattern>  
+	    </encoder>  
+	</appender>  
+	<logger name="webLogAspect" additivity="false">
+      <appender-ref ref="webLogAspectAppender"/>  
+    </logger>
+    
+    <appender name="backRecoSyslogAppender" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">   
+	      <level>INFO</level>   
+	      <onMatch>ACCEPT</onMatch>   
+	      <onMismatch>DENY</onMismatch>   
+	    </filter>
+	    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">  
+	        <fileNamePattern>/data/htdocs/wx/proxy-platform-tongshan-uat/config/log/backReco/backReco.%d{yyyy-MM-dd}.log</fileNamePattern>  
+	        <MaxHistory>30</MaxHistory>
+	    </rollingPolicy>  
+	    <encoder>  
+	        <pattern>%msg%n</pattern>  
+	    </encoder>  
+    </appender>
+    <logger name="backReco" additivity="false">
+      <appender-ref ref="backRecoSyslogAppender"/>  
+    </logger>
+	
+	 <!-- 日志输出级别 -->
+    <root>
+        <level value="INFO"/>
+        <appender-ref ref="consoleAppender"/>
+        <appender-ref ref="dailyRollingFileAppender"/>
+       <!--  <appender-ref ref="db"/> -->
+    </root>
+      
+ 
+ </configuration>
